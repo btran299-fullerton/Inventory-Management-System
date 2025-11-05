@@ -8,7 +8,7 @@ The Inventory Management System is a web-based application designed to help busi
 ## Technologies Used
 - **Frontend:** HTML, CSS  
 - **Backend:** PHP, MySQL  
-- **Additional Tools:** JavaScript (optional), XAMPP (for local hosting)
+- **Additional Tools:** JavaScript, XAMPP (for local hosting)
 
 ---
 
