@@ -38,5 +38,3 @@ The Inventory Management System is a web-based application designed to help busi
 3. You can now navigate the dashboard, add products, manage suppliers, and view reports
 
 ---
-
-## Project Structure
