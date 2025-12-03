@@ -12,8 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_stmt_bind_param($stmt, "s", $username);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_bind_result($stmt, $id, $dbuser, $dbpass);
+
     if (mysqli_stmt_fetch($stmt)) {
-        if (password_verify($password, $dbpass)) {
+        // For now, plain text password
+        if ($password === $dbpass) {
             $_SESSION['user'] = $dbuser;
             header('Location: dashboard.php');
             exit();

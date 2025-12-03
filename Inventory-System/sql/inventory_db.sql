@@ -1,3 +1,4 @@
+-- Create database
 CREATE DATABASE IF NOT EXISTS inventory_db;
 USE inventory_db;
 
@@ -8,9 +9,9 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL
 );
 
--- INSERT ADMIN USER (username: admin, password: admin123)
+-- INSERT ADMIN USER (plain password for testing)
 INSERT INTO users (username, password)
-VALUES ('admin', '$2y$10$Qr5V3a7uYk3jJXwJlPWUgu1pGjDJ3YvQlxI8bfYmoVWwP2N8t6yTi');
+VALUES ('admin', 'admin123');
 
 -- PRODUCTS TABLE
 CREATE TABLE products (
