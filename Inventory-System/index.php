@@ -8,24 +8,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
     $password = $_POST['password'];
 
-    $stmt = mysqli_prepare($conn, "SELECT id, username, password FROM users WHERE username = ? LIMIT 1");
-    mysqli_stmt_bind_param($stmt, "s", $username);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_bind_result($stmt, $id, $dbuser, $dbpass);
+    $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE username = ? LIMIT 1");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->store_result();
 
-    if (mysqli_stmt_fetch($stmt)) {
-        // For now, plain text password
-        if ($password === $dbpass) {
+    if ($stmt->num_rows === 1) {
+        $stmt->bind_result($id, $dbuser, $dbpass);
+        $stmt->fetch();
+
+        // ✅ CHECK HASHED PASSWORD CORRECTLY
+        if (password_verify($password, $dbpass)) {
             $_SESSION['user'] = $dbuser;
-            header('Location: dashboard.php');
+            header("Location: dashboard.php");
             exit();
         } else {
-            $message = 'Incorrect password.';
+            $message = "Incorrect password.";
         }
     } else {
-        $message = 'User not found.';
+        $message = "User not found.";
     }
-    mysqli_stmt_close($stmt);
+
+    $stmt->close();
 }
 ?>
 <!doctype html>

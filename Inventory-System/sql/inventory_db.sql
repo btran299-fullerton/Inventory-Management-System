@@ -9,9 +9,11 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL
 );
 
--- INSERT ADMIN USER (plain password for testing)
+-- INSERT ADMIN USER
+-- Username: admin
+-- Password: password123
 INSERT INTO users (username, password)
-VALUES ('admin', 'admin123');
+VALUES ('admin', '$2y$10$kKmF5cjpYw0rrmglPg/rUelznohMz/9AQmfQz8Uw1yKlMNd7k4hwm');
 
 -- PRODUCTS TABLE
 CREATE TABLE products (
