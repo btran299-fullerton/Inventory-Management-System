@@ -1,57 +1,57 @@
 <?php
 session_start();
-require 'includes/db_connect.php';
+require_once "includes/db_connect.php";
 
-$message = '';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['username']);
-    $password = $_POST['password'];
+    // Fetch user
+    $sql = "SELECT * FROM users WHERE username='$username' LIMIT 1";
+    $result = mysqli_query($conn, $sql);
 
-    $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE username = ? LIMIT 1");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $stmt->store_result();
+    if ($result && mysqli_num_rows($result) === 1) {
+        $row = mysqli_fetch_assoc($result);
 
-    if ($stmt->num_rows === 1) {
-        $stmt->bind_result($id, $dbuser, $dbpass);
-        $stmt->fetch();
+        // SIMPLE CHECK (no hashing)
+        if ($password == $row["password"]) {
 
-        // ✅ CHECK HASHED PASSWORD CORRECTLY
-        if (password_verify($password, $dbpass)) {
-            $_SESSION['user'] = $dbuser;
-            header("Location: dashboard.php");
-            exit();
-        } else {
-            $message = "Incorrect password.";
+            $_SESSION["user_id"] = $row["id"];
+            $_SESSION["username"] = $row["username"];
+
+            // Admin goes to admin dashboard
+            if ($row["username"] === "admin") {
+                header("Location: admin_dashboard.php");
+                exit;
+            } 
+            // Normal user goes to user dashboard
+            else {
+                header("Location: user_dashboard.php");
+                exit;
+            }
         }
-    } else {
-        $message = "User not found.";
     }
 
-    $stmt->close();
+    $error = "Invalid username or password!";
 }
 ?>
-<!doctype html>
+
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Login - Inventory System</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+    <title>Login</title>
 </head>
 <body>
-<div class="login-box">
-  <h2>Admin Login</h2>
-  <?php if ($message): ?>
-    <p class="error"><?php echo htmlspecialchars($message); ?></p>
-  <?php endif; ?>
-  <form method="post">
-    <label>Username</label><br>
-    <input type="text" name="username" required><br><br>
-    <label>Password</label><br>
-    <input type="password" name="password" required><br><br>
+
+<h2>Inventory System Login</h2>
+
+<form method="POST">
+    <input type="text" name="username" placeholder="Username" required><br><br>
+    <input type="password" name="password" placeholder="Password" required><br><br>
     <button type="submit">Login</button>
-  </form>
-</div>
+</form>
+
+<?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>
+
 </body>
 </html>

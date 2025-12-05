@@ -1,29 +1,13 @@
 <?php
-require 'includes/auth_check.php';
-require 'includes/db_connect.php';
-include 'includes/header.php';
+session_start();
 
-// Get summary counts
-$p_count = mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(*) FROM products"))[0];
-$s_count = mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(*) FROM suppliers"))[0];
-$low_count = mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(*) FROM products WHERE quantity <= 5"))[0];
+if (!isset($_SESSION["username"]) || $_SESSION["username"] !== "admin") {
+    header("Location: index.php");
+    exit;
+}
 ?>
-<h2>Dashboard</h2>
-<div class="cards">
-  <div class="card">
-    <h3>Products</h3>
-    <p><?php echo $p_count; ?></p>
-  </div>
-  <div class="card">
-    <h3>Suppliers</h3>
-    <p><?php echo $s_count; ?></p>
-  </div>
-  <div class="card">
-    <h3>Low Stock (≤5)</h3>
-    <p><?php echo $low_count; ?></p>
-  </div>
-</div>
 
-<p>Welcome, <strong><?php echo htmlspecialchars($_SESSION['user']); ?></strong></p>
+<h1>Welcome, Admin!</h1>
+<p>You are logged in as: <?php echo $_SESSION["username"]; ?></p>
 
-<?php include 'includes/footer.php'; ?>
+<a href="logout.php">Logout</a>
