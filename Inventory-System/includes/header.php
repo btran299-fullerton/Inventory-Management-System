@@ -1,5 +1,7 @@
 <?php
-// Simple header used by pages
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,16 +11,13 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<header>
-  <div class="container">
-    <h1><a href="dashboard.php">Inventory System</a></h1>
-    <nav>
-      <a href="dashboard.php">Dashboard</a> |
-      <a href="view_products.php">Products</a> |
-      <a href="view_suppliers.php">Suppliers</a> |
-      <a href="purchase_orders.php">Purchase Orders</a> |
-      <a href="logout.php">Logout</a>
-    </nav>
-  </div>
-</header>
-<main class="container">
+<nav style="background:#333; padding:10px; color:white;">
+    <span>Inventory System</span>
+
+    <?php if (isset($_SESSION["username"])): ?>
+        <span style="margin-left:20px;">Logged in as: <?php echo htmlspecialchars($_SESSION["username"]); ?></span>
+        <a href="logout.php" style="color:white; margin-left:20px;">Logout</a>
+    <?php endif; ?>
+</nav>
+
+<div class="container" style="padding:20px;">
