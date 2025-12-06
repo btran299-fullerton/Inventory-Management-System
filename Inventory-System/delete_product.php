@@ -1,5 +1,11 @@
 <?php
 require 'includes/auth_check.php';
+
+if ($_SESSION['username'] !== 'admin'){
+    header('Location: user_dashboard.php');
+    exit;
+}
+
 require 'includes/db_connect.php';
 
 $id = intval($_GET['id'] ?? 0);

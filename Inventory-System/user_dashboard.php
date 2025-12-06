@@ -8,11 +8,15 @@ if (!isset($_SESSION["username"])) {
 require_once "includes/header.php";
 ?>
 
-<h1>User Dashboard</h1>
-<p>Welcome, <?php echo $_SESSION["username"]; ?></p>
+<div class="card">
+    <h1 class="page-title">User Dashboard</h1>
+    <p class="muted">
+        Welcome, <?php echo htmlspecialchars($_SESSION["username"]); ?>.
+    </p>
 
-<ul>
-    <li><a href="view_products.php">View Products</a></li>
-</ul>
+    <div class="dashboard-grid">
+        <a href="view_products.php" class="btn btn-primary">View Products</a>
+    </div>
+</div>
 
 <?php require_once "includes/footer.php"; ?>
