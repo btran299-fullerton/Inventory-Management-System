@@ -15,4 +15,5 @@ require_once "includes/header.php";
     <li><a href="view_products.php">View / Edit / Delete Products</a></li>
 </ul>
 
+
 <?php require_once "includes/footer.php"; ?>
