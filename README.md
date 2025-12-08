@@ -64,10 +64,7 @@ The Inventory Management System is a web-based application that helps businesses
 5. User Dashboard![userdashboard](https://github.com/user-attachments/assets/3fa425f7-591f-4585-aba9-401de34daa31)
 6. User View-Products![userviewproducts](https://github.com/user-attachments/assets/b56b434f-2908-49ae-b28e-d110d665388d)
 
-
-
-
-
+---
 
 
 ## Notes
