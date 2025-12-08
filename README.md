@@ -56,6 +56,20 @@ The Inventory Management System is a web-based application that helps businesses
 
 ---
 
+### Key Feature Visualization
+1. Admin Add-Product![adminaddproducts](https://github.com/user-attachments/assets/0919fff9-24dd-40a4-9060-72e75331eb9c)
+2. Admin Dashboard![admindashboard](https://github.com/user-attachments/assets/240b1be1-4be7-439e-b654-d840a3e287ea)
+3. Admin View-Products![adminviewproducts](https://github.com/user-attachments/assets/4e0d7d3c-98ef-48ae-87ff-3857eba91b30)
+4. Login-Page![loginpage](https://github.com/user-attachments/assets/7b108361-e18b-44ce-bfe3-ba033b366e27)
+5. User Dashboard![userdashboard](https://github.com/user-attachments/assets/3fa425f7-591f-4585-aba9-401de34daa31)
+6. User View-Products![userviewproducts](https://github.com/user-attachments/assets/b56b434f-2908-49ae-b28e-d110d665388d)
+
+
+
+
+
+
+
 ## Notes
 - Do **not rename** the folder; keep it as `Inventory-System`  
 - All database changes are stored in `inventory_db`  
